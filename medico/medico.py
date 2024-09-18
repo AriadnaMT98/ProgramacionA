@@ -4,10 +4,10 @@ class Medico:
     id: int
     nombre: str
     ano_nacimiento: int
-    rfc = str
-    direccion = str
+    rfc: str
+    direccion: str
 
-    def __init__(self, nombre: str, ano_nacimiento: int, rfc: int, direccion: str):
+    def __init__(self, nombre:str, ano_nacimiento:int, rfc:str, direccion:str):
         self.id = random.randint(1, 1000)
         self.nombre = nombre
         self.ano_nacimiento = ano_nacimiento

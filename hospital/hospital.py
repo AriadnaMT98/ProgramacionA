@@ -4,9 +4,9 @@ from medico.medico import Medico
 from consulta.consulta import Consulta
 
 class Hospital:
-    pacientes: List[Paciente]=[]
-    medicos: List[Medico]=[]
-    consultas: List[Consulta]=[]
+    pacientes: List[Paciente] = []
+    medicos: List[Medico] = []
+    consultas: List[Consulta] = []
 
     def registrar_consulta(self, id_paciente, id_medico):
         if not self.validar_cantidad_usuarios():
@@ -39,16 +39,26 @@ class Hospital:
                 break
     
     def mostrar_pacientes(self):
-        print("\n----- Pacientes en el Sistema -----")
+        if len(self.pacientes) == 0:
+            print("\nNo existen pacientes en el sistema\n")
+            return
+        for paciente in self.pacientes:
+                paciente.mostrar_informacion_paciente()
+    
+    def mostrar_pacientes_menores(self):
         if len(self.pacientes) == 0:
             print("\nNo existen pacientes en el sistema\n")
             return
         for paciente in self.pacientes:
             if paciente.ano_nacimiento > 2006:
-                print("\nMenor de edad")
                 paciente.mostrar_informacion_paciente()
-            else:
-                print("\nMayor de edad")
+
+    def mostrar_pacientes_mayores(self):
+        if len(self.pacientes) == 0:
+            print("\nNo existen pacientes en el sistema\n")
+            return
+        for paciente in self.pacientes:
+            if paciente.ano_nacimiento <= 2006:
                 paciente.mostrar_informacion_paciente()
 
     def validar_existencia_paciente(self, id_paciente):
@@ -59,7 +69,6 @@ class Hospital:
         return False
     
     def mostrar_medicos(self):
-        print("\n----- Medicos en el Sistema -----")
         if len(self.medicos) == 0:
             print("\nNo existen medicos en el sistema\n")
             return
