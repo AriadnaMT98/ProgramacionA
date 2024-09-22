@@ -13,3 +13,4 @@ class Maestro:
         self.apellido = apellido
         self.rfc = rfc
         self.sueldo = sueldo
+    

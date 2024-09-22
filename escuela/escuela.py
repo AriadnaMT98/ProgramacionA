@@ -7,17 +7,19 @@ from datetime import datetime
 from random import randint
 
 class Escuela:
-    def __init__(self):
-        self.list_estudiantes: List[Estudiante] = []
-        self.list_maestros: List[Maestro] = []
-        self.list_grupos: List[Grupo] = []
-        self.list_materias: List[Materia] = []
+    list_estudiantes: List[Estudiante] = []
+    list_maestros: List[Maestro] = []
+    list_grupos: List[Grupo] = []
+    list_materias: List[Materia] = []
 
     def registrar_estudiante(self, estudiante: Estudiante):
         self.list_estudiantes.append(estudiante)
 
     def registrar_maestro(self, maestro: Maestro):
         self.list_maestros.append(maestro)
+
+    def registar_materia(self, materia: Materia):
+        self.list_materias.append(materia)
     
     def generar_numero_control_estudiante(self):
         ano = datetime.now().year
@@ -37,4 +39,15 @@ class Escuela:
         
         numero_control = f"M{ano_nacimiento}{dia}{aleatorio}{dos_letras_nombre}{dos_letras_rfc}{longitud_maestros}"
         return numero_control
+
+    def generar_id_materia(self, materia: Materia):
+        dos_digitos_nombre = materia.nombre[-2:].upper()
+        semestre = materia.semestre
+        cantidad_creditos = materia.creditos
+        aleatorio = randint(1, 1000)
+
+        id_materia = f"MT{dos_digitos_nombre}{semestre}{cantidad_creditos}{aleatorio}"
+        return id_materia
+
+        
    
