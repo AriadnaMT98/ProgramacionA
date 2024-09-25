@@ -21,6 +21,48 @@ class Escuela:
     def registar_materia(self, materia: Materia):
         self.list_materias.append(materia)
     
+    def listar_estudiantes(self):
+        print("\n** ESTUDIANTES **\n")
+
+        for estudiante in self.list_estudiantes:
+            print(estudiante.mostrar_info_estudiante())
+
+    def listar_maestros(self):
+        print("\n** MAESTROS **\n")
+
+        for maestro in self.list_maestros:
+            print(maestro.mostrar_info_maestro())
+
+    def listar_materias(self):
+        print("\n** MATERIAS **\n")
+
+        for materias in self.list_materias:
+            print(materias.mostrar_info_materia())
+
+    def eliminar_estudiante(self, numero_control: str):
+        for estudiante in self.list_estudiantes:
+            if estudiante.numero_control == numero_control:
+                self.list_estudiantes.remove(estudiante)
+                print("Estudiante eliminado\n")
+                return
+        print(f"No se encontro el estudiante con numero de control: {numero_control}\n")
+
+    def eliminar_maestro(self, numero_control: str):
+        for maestro in self.list_maestros:
+            if maestro.numero_control == numero_control:
+                self.list_maestros.remove(maestro)
+                print("Maestro eliminado\n")
+                return
+        print(f"No se encontro el maestro con numero de control: {numero_control}\n")
+
+    def eliminar_materia(self, id_materia: str):
+        for materia in self.list_materias:
+            if materia.id_materia == id_materia:
+                self.list_materias.remove(materia)
+                print("Materia eliminada\n")
+                return
+        print(f"No se encontro la materia con ID: {id_materia}\n")
+
     def generar_numero_control_estudiante(self):
         ano = datetime.now().year
         mes = datetime.now().month

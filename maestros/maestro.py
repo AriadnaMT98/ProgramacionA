@@ -14,3 +14,7 @@ class Maestro:
         self.rfc = rfc
         self.sueldo = sueldo
     
+    def mostrar_info_maestro(self):
+        nombre_completo = f"{self.nombre} {self.apellido}"
+        info = f"Numero de control:  {self.numero_control}\nNombre completo: {nombre_completo}\nAño de nacimiento: {self.ano_nacimiento}\nRFC: {self.rfc}\nSueldo: {self.sueldo}\n"
+        return info
