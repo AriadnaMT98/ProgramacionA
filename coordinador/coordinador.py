@@ -12,7 +12,7 @@ class Coordinador(Usuario):
         self.rfc = rfc
         self.anios_antiguedad = anios_antiguedad
 
-    def mostrar_info_coordinador(self):
+    def mostrar_info_coordinador(numero_control):
         nombre_completo = f"{self.nombre} {self.apellido}"
         info = f"Numero de control:  {self.numero_control}\nNombre completo: {nombre_completo}\nSueldo: {self.sueldo}\nRFC: {self.rfc}\nAños de antigüedad: {self.anios_antiguedad}\nRol: {self.rol}\n"
         return info

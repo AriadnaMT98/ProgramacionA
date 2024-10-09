@@ -1,11 +1,13 @@
 from escuela.escuela import Escuela
 from estudiantes.estudiante import Estudiante
 from maestros.maestro import Maestro
+from coordinador.coordinador import Coordinador
 from materias.materia import Materia
 from semestre.semestre import Semestre
 from carrera.carrera import Carrera
 from grupos.grupo import Grupo
 from datetime import datetime
+from usuario.utils.roles import Rol
 
 
 class Menu:
@@ -25,24 +27,24 @@ class Menu:
             print("*** BIENVENIDO ***")
             print("Inicia sesión para Continuar")
 
-            nombre_usuario = input("Ingresa tu nombre de usuario: ")
+            numero_control = input("Ingresa tu numero de control: ")
             contraseña_usuario = input("Ingresa tu contraseña: ")
 
-            if nombre_usuario == self.ususario_estudiante:
-                if contraseña_usuario == self.contrasenia_estudiante:
+            usuario = self.escuela.validar_inicio_sesion(numero_control=numero_control, contrasenia=contraseña_usuario)
+               
+            if usuario is None:
+                intentos = self.mostrar_intento_sesion_fallido(intentos_usuario=intentos)
+            else:
+                if usuario.rol == Rol.ESTUDIANTE:
                     self.mostrar_menu_estudiante()
                     intentos = 0
-                else:
-                    intentos = slef.mostrar_intento_sesion_fallido(intentos_usuario=intentos)
-            elif nombre_usuario == self.ususario_maestro:
-                if contraseña_usuario == self.contrasenia_maestro:
+                elif usuario.rol == Rol.MAESTRO:
                     self.mostrar_menu_maestro()
                     intentos = 0
                 else:
-                    intentos = slef.mostrar_intento_sesion_fallido(intentos_usuario=intentos)
-            else:
-                intentos = self.mostrar_intento_sesion_fallido(intentos_usuario=intentos)
-               
+                    self.mostrar_menu()
+                    intentos = 0
+            
 
         print("Máximos intentos de inicio de sesión alcanzados")
 
@@ -54,7 +56,7 @@ class Menu:
 
     def mostrar_menu_estudiante(self):
         opcion = 0
-        while opcion != 3:
+        while opcion != 9:
             print("\n** MINDBOX **\n")
             print("1. Ver horario")
             print("2. Ver grupos")
@@ -63,16 +65,17 @@ class Menu:
             print("5. Ver semestres")
             print("6. Ver carreras")
             print("7. Registrar horario")
-            print("8. Salir")
+            print("8. Ver mi informacion")#TAREA
+            print("9. Salir")
 
             opcion = int(input("Ingrese una opcion: "))
 
-            if opcion == 3:
+            if opcion == 9:
                 break
 
     def mostrar_menu_maestro(self):
         opcion = 0
-        while opcion != 3:
+        while opcion != 9:
             print("\n** MINDBOX **\n")
             print("1. Ver horarios")
             print("2. Ver grupos")
@@ -81,7 +84,8 @@ class Menu:
             print("5. Ver semestres")
             print("6. Ver carreras")
             print("7. Registar horario")
-            print("8. Salir")
+            print("8. Ver mi informacion")
+            print("9. Salir")
 
             opcion = int(input("Ingrese una opcion: "))
 
@@ -108,6 +112,7 @@ class Menu:
             print("14. Registrar semestre")
             print("15. Mostrar carrera")
             print("16. Mostrar semestre")
+            print("17. Ver mi informacion")
             print("20. Salir")
 
             opcion = input("Ingresa una opción para continuar: ")
@@ -178,7 +183,6 @@ class Menu:
 
                 self.escuela.registrar_grupo(grupo=grupo)
 
-
             elif opcion =="5":
                 pass
             elif opcion == "6":
@@ -235,7 +239,10 @@ class Menu:
         
             elif opcion == "16":
                 self.escuela.listar_semestre()
-        
+
+            elif opcion == "17":
+                self.coordinador.mostrar_info_coordinador(numero_control)
+
             elif opcion =="20":
                 print("\nHasta luego")
                 break
