@@ -2,6 +2,7 @@ from escuela.escuela import Escuela
 from estudiantes.estudiante import Estudiante
 from maestros.maestro import Maestro
 from coordinador.coordinador import Coordinador
+from usuario.usuario import Usuario
 from materias.materia import Materia
 from semestre.semestre import Semestre
 from carrera.carrera import Carrera
@@ -12,14 +13,6 @@ from usuario.utils.roles import Rol
 
 class Menu:
     escuela: Escuela = Escuela()
-
-    ususario_estudiante: str = "juan123"
-    contrasenia_estudiante: str = "12345*";
-
-    ususario_maestro: str = "hilary123"
-    contrasenia_maestro: str = "54321*";
-
-    escuela = Escuela()
 
     def login(self):
         intentos = 0
@@ -36,10 +29,10 @@ class Menu:
                 intentos = self.mostrar_intento_sesion_fallido(intentos_usuario=intentos)
             else:
                 if usuario.rol == Rol.ESTUDIANTE:
-                    self.mostrar_menu_estudiante()
+                    self.mostrar_menu_estudiante(estudiante=usuario)
                     intentos = 0
                 elif usuario.rol == Rol.MAESTRO:
-                    self.mostrar_menu_maestro()
+                    self.mostrar_menu_maestro(usuario)
                     intentos = 0
                 else:
                     self.mostrar_menu()
@@ -52,9 +45,7 @@ class Menu:
         print("Usuario o contraseña incorrectos. Intenta de nuevo")
         return intentos_usuario + 1
         
-
-
-    def mostrar_menu_estudiante(self):
+    def mostrar_menu_estudiante(self, estudiante: Estudiante):
         opcion = 0
         while opcion != 9:
             print("\n** MINDBOX **\n")
@@ -69,8 +60,15 @@ class Menu:
             print("9. Salir")
 
             opcion = int(input("Ingrese una opcion: "))
+            if opcion == "2":
+                self.escuela.ver_grupos_asignados_a_estudiante(
+                    numero_control_estudiante=estudiante.numero_control
+                )
 
-            if opcion == 9:
+            elif opcion == "8":
+                print(usuario.mostrar_info_estudiante())
+
+            elif opcion == "9":
                 break
 
     def mostrar_menu_maestro(self):
@@ -89,7 +87,9 @@ class Menu:
 
             opcion = int(input("Ingrese una opcion: "))
 
-            if opcion == 5:
+            if opcion == "8":
+                print(usuario.mostrar_info_maestro())
+            elif opcion == "9":
                 break
 
 
@@ -113,6 +113,7 @@ class Menu:
             print("15. Mostrar carrera")
             print("16. Mostrar semestre")
             print("17. Ver mi informacion")
+            print("18. Registrar estudiante en grupo")
             print("20. Salir")
 
             opcion = input("Ingresa una opción para continuar: ")
@@ -163,8 +164,15 @@ class Menu:
                 descripcion = input("Ingresa la descripcion: ")
                 semestre = int(input("Ingresa el semestre: "))
                 creditos = int(input("Ingresa los creditos: "))
+                id_maestro = str(input("Ingresa el ID del maestro asignado a esta materia: "))
 
-                materia = Materia(id_materia="", nombre=nombre, descripcion=descripcion, semestre=semestre, creditos=creditos)
+                mestro = self.escuela.buscar_maestro_por_numero_control(numero_control_maestro== id_maestro)
+
+                if maestro is None:
+                    print("No existe maestro con ese numrode control")
+                    return
+
+                materia = Materia(id_materia="", nombre=nombre, descripcion=descripcion, semestre=semestre, creditos=creditos, maestro=maestro)
 
                 generar_id_materia = self.escuela.generar_id_materia(materia)
                 materia.id_materia = generar_id_materia
@@ -241,7 +249,16 @@ class Menu:
                 self.escuela.listar_semestre()
 
             elif opcion == "17":
-                self.coordinador.mostrar_info_coordinador(numero_control)
+                pass
+
+            elif opcion == "18":
+                numero_control_estudiante = input("Ingresa el numero de control del estudiante: ")
+                id_grupo = input("Ingresa el ID del grupo al cual asignaras el estudiante: ")
+
+                self.escuela.registrar_estudiante_en_grupo(
+                    numero_control_estudiante=numero_control_estudiante,
+                    id_grupo=id_grupo
+                )
 
             elif opcion =="20":
                 print("\nHasta luego")

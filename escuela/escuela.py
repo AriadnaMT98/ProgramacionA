@@ -76,6 +76,12 @@ class Escuela:
         for maestro in self.lista_maestros:
             print(maestro.mostrar_info_maestro())
 
+    def listar_coordinadores(self):
+        print("\n** COORDINADORES **\n")
+
+        for coordinador in self.lista_coordinadores:
+            print(coordinador.mostrar_info_coordinador())
+
     def listar_materias(self):
         print("\n** MATERIAS **\n")
 
@@ -160,6 +166,48 @@ class Escuela:
         id_materia = f"MT{dos_digitos_nombre}{semestre}{cantidad_creditos}{aleatorio}"
         return id_materia
 
+    def buscar_estudiante_por_numero_control(self, numero_control_estudiante: str):
+        for estudiante in self.lista_estudiantes:
+            if estudiante.numero_control == numero_control_estudiante:
+                return estudiante
+        return None
 
-        
+    def buscar_maestro_por_numero_control(self, numero_control_maestro: str):
+        for maestro in self.lista_maestros:
+            if maestro.numero_control == numero_control_maestro:
+                return maestro
+        return None
+
+    def buscar_grupo_por_id(self, id_grupo: str):
+        for grupo in self.lista_grupos:
+            if grupo.id == id_grupo:
+                return grupo
+        return None
+
+    def registrar_estudiante_en_grupo(self, numero_control_estudiante:str):
+        estudiante = self.buscar_estudiante_por_numero_control(
+            numero_control_estudiante=numero_control_estudiante
+        )
+        if estudiante is None:
+            print("No se encontró un estudiante con el numero de control proporcionado")
+            return
+        grupo= self.buscar_grupo_por_id(id_grupo=id_grupo)
+
+        if grupo is None:
+            print("No se encontro un grupo con el ID proporcionado")
+            return
+
+        grupo.registrar_estudiante(estudiante=estudiante)
+        print("Estudiante asignado en el grupo correctamente")
    
+    def ver_grupos_asignados_a_estudiante(self, numero_control_estudiante: str):
+            estudiante = self.buscar_estudiante_por_numero_control(
+                numero_control_estudiante=numero_control_estudiante
+            )
+            if estudiante == None:
+                print("No se encontro estudiante con ese numero de control")
+                return
+
+            for grupo in self.lista_grupos:
+                grupo.mostrar_info_grupo_para_estudiante()
+
