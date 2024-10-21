@@ -180,18 +180,18 @@ class Escuela:
 
     def buscar_grupo_por_id(self, id_grupo: str):
         for grupo in self.lista_grupos:
-            if grupo.id == id_grupo:
+            if grupo.id_grupo == id_grupo:
                 return grupo
         return None
 
-    def registrar_estudiante_en_grupo(self, numero_control_estudiante:str):
+    def registrar_estudiante_en_grupo(self, numero_control_estudiante:str, id_grupo:str):
         estudiante = self.buscar_estudiante_por_numero_control(
             numero_control_estudiante=numero_control_estudiante
         )
         if estudiante is None:
             print("No se encontró un estudiante con el numero de control proporcionado")
             return
-        grupo= self.buscar_grupo_por_id(id_grupo=id_grupo)
+        grupo = self.buscar_grupo_por_id(id_grupo=id_grupo)
 
         if grupo is None:
             print("No se encontro un grupo con el ID proporcionado")

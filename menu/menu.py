@@ -2,7 +2,6 @@ from escuela.escuela import Escuela
 from estudiantes.estudiante import Estudiante
 from maestros.maestro import Maestro
 from coordinador.coordinador import Coordinador
-from usuario.usuario import Usuario
 from materias.materia import Materia
 from semestre.semestre import Semestre
 from carrera.carrera import Carrera
@@ -61,9 +60,7 @@ class Menu:
 
             opcion = int(input("Ingrese una opcion: "))
             if opcion == "2":
-                self.escuela.ver_grupos_asignados_a_estudiante(
-                    numero_control_estudiante=estudiante.numero_control
-                )
+                self.escuela.ver_grupos_asignados_a_estudiante()
 
             elif opcion == "8":
                 print(usuario.mostrar_info_estudiante())

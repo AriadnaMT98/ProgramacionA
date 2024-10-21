@@ -23,10 +23,10 @@ class Grupo:
         return info
 
     def registrar_estudiante(self, estudiante:Estudiante):
-        estudiantes.append(estudiante)
+        self.estudiantes.append(estudiante)
 
     def registrar_materia(self, materia:Materia):
-        materias.append(materia)
+        self.materias.append(materia)
 
     def mostrar_info_grupo_para_estudiante(self):
         print(f"\nInformacion del Grupo {self.tipo}, del semestre {self.id_semestre}")

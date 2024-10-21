@@ -7,8 +7,11 @@ from random import randint
 class Carrera:
     matricula: str
     nombre: str
+    materias: List[Materia]
+    estudiantes: List[Estudiante]
     numero_semestres: int = 0
     semestres: List[Semestre] = []
+
 
     def __init__(self, nombre: str):
         self.matricula = self.generar_id(nombre)
