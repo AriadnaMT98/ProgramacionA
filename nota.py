@@ -8,3 +8,5 @@ P1 = tk.frame(Nota)
 P2 = tk.frame(Nota)
 Nota.add(P1)
 Nota.add(P2)
+
+
