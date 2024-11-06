@@ -40,28 +40,34 @@ def division():
  
 ventana = tk.Tk()
 ventana.title("Calculadora de suma")
-ventana.geometry("500x500")
+ventana.geometry("423x300")
  
-label_num1 = tk.Label(ventana, text="Número 1:")
-label_num1.pack(pady=5)
+label_num1 = tk.Label(ventana, text="Número 1:", bg="lightblue", fg="black", font=("Arial", 11, "bold"), relief="sunken", padx=10, pady=10)
+label_num1.grid(row=0, column=0)
 entry_num1 = tk.Entry(ventana)
-entry_num1.pack(pady=5)
+entry_num1.grid(row=1, column=0)
  
-label_num2 = tk.Label(ventana, text="Número 2:")
-label_num2.pack(pady=5)
+label_num2 = tk.Label(ventana, text="Número 2:", bg="lightblue", fg="black", font=("Arial", 11, "bold"), relief="sunken", padx=10, pady=10)
+label_num2.grid(row=0, column=6)
 entry_num2 = tk.Entry(ventana)
-entry_num2.pack(pady=5)
+entry_num2.grid(row=1, column=6)
  
-boton_sumar = tk.Button(ventana, text="Sumar", command=sumar)
-boton_sumar.pack(pady=20)
+boton_sumar = tk.Button(ventana, text="Sumar", command=sumar, bg="lightgreen", font=("Arial", 11, "bold"))
+boton_sumar.grid(row=4, column=0)
 
-boton_restar = tk.Button(ventana, text="Restar", command=restar)
-boton_restar.pack(pady=20)
+boton_restar = tk.Button(ventana, text="Restar", command=restar, bg="lightgreen", font=("Arial", 11, "bold"))
+boton_restar.grid(row=4, column=2)
 
-boton_multiplicar = tk.Button(ventana, text="Multiplicar", command=multiplicar)
-boton_multiplicar.pack(pady=20)
+boton_multiplicar = tk.Button(ventana, text="Multiplicar", command=multiplicar, bg="lightgreen", font=("Arial", 11, "bold"))
+boton_multiplicar.grid(row=4, column=4)
 
-boton_division = tk.Button(ventana, text="Division", command=division)
-boton_division.pack(pady=20)
+boton_division = tk.Button(ventana, text="Dividir", command=division, bg="lightgreen", font=("Arial", 11, "bold"))
+boton_division.grid(row=4, column=6)
+
+label_num3 = tk.Label(ventana, text="",padx=10, pady=10)
+label_num3.grid(row=0, column=3)
+
+label_num4= tk.Label(ventana, text="",padx=10, pady=10)
+label_num4.grid(row=3, column=3)
  
 ventana.mainloop()
