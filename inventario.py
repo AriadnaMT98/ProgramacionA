@@ -12,5 +12,11 @@ class Inventario:
         if not self.lista_productos:
             messagebox.showinfo("INVENTARIO", "El inventario está vacío.")
         else:
-            productos_info = "\n".join([producto.mostrar_info() for producto in self.lista_productos])
-            messagebox.showinfo("INVENTARIO", productos_info)
+            productos_info = ""
+            total = 0
+            for producto in self.lista_productos:
+                productos_info += producto.mostrar_info() 
+                total += producto.valor_total()  
+            mensaje = f"{productos_info}\nValor total del inventario: {total}"
+            messagebox.showinfo("INVENTARIO", mensaje)
+        

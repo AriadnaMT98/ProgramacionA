@@ -14,5 +14,5 @@ class Producto:
         return total
 
     def mostrar_info(self):
-        info=(f"Nombre del producto:  {self.nombre}\nPrecio del producto: {self.precio}\nCantidad de producto: {self.cantidad}\nValor total: {self.valor_total()}\n")
+        info=(f"\nNombre del producto:  {self.nombre}\nPrecio del producto: {self.precio}\nCantidad de producto: {self.cantidad}\nValor total: {self.valor_total()}\n")
         return info
