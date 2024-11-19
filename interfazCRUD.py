@@ -44,6 +44,51 @@ def actualizar():
         listbox.delete(i)
     mostrar()
 
+def delete():
+    idAdd = identificador.get()
+    mysqlC = mysql.connector.connect(host="localhost", user="root", password="", database= "pruebaprogramacion")
+    micursos = mysqlC.cursor()
+    try:
+        micursos.execute(f"DELETE FROM USUARIOS WHERE id={idAdd}")
+        mysqlC.commit()
+        name.delete(0,END)
+        email.delete(0,END)
+        password.delete(0,END)
+        identificador.delete(0,END)
+        messagebox.showinfo("informacion", "usuario eliminado")
+        actualizar()
+    except Exception as e:
+        print(e)
+        mysqlC.rollback()
+        mysqlC.close()
+
+def edit():
+    usuarioAdd = name.get()
+    correoAdd = email.get()
+    contraAdd = password.get()
+    idAdd = identificador.get()
+    mysqlC = mysql.connector.connect(host="localhost", user="root", password="", database= "pruebaprogramacion")
+    micursos = mysqlC.cursor()
+    try:
+        micursos.execute(f"UPDATE usuarios set nombre='{usuarioAdd}', correo='{correoAdd}', contraseña ='{contraAdd}' where id={idAdd}")
+        mysqlC.commit()
+        name.delete(0,END)
+        email.delete(0,END)
+        password.delete(0,END)
+        identificador.delete(0,END)
+        messagebox.showinfo("informacion", "usuario editado")
+        actualizar()
+
+    except Exception as e:
+        print(e)
+        mysqlC.rollback()
+        mysqlC.close()
+
+def actualizar():
+    for i in listbox.get_children():
+        listbox.delete(i)
+    mostrar()
+
 def obtenerR(event):
     name.delete(0,END)
     email.delete(0,END)
@@ -94,8 +139,8 @@ password = tk.Entry(root)
 password.place(x=270, y=140)
  
 tk.Button(root,text="Crear",command=add, height=5, width=10, font=("Arial",12)).place(x=100,y=170)
-tk.Button(root,text="Editar",command=show, height=5, width=10, font=("Arial",12)).place(x=250,y=170)
-tk.Button(root,text="Eliminar",command=show, height=5, width=10, font=("Arial",12)).place(x=400,y=170)
+tk.Button(root,text="Editar",command=edit, height=5, width=10, font=("Arial",12)).place(x=250,y=170)
+tk.Button(root,text="Eliminar",command=delete, height=5, width=10, font=("Arial",12)).place(x=400,y=170)
  
 columnas = ("Id","Nombre","Correo","Contraseña")
 listbox = ttk.Treeview(root,columns=columnas,show="headings")
