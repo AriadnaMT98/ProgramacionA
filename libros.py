@@ -3,9 +3,6 @@ import mysql.connector
 from tkinter import ttk,messagebox
 from tkinter import *
  
- 
-def show():
-    print("hola")
 
 def mostrar():
     mysqlC = mysql.connector.connect(host="localhost", user="root", password="", database= "proyecto")
